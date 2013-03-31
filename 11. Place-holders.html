@@ -1,0 +1,59 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <title>Place holders!</title>
+	<link href="styles/js-console.css" rel="stylesheet" />
+</head>
+<body>
+	<div id="js-console">
+		<div class="input">
+			<label for="tb-string">String:</label>
+			<textarea id="tb-string"></textarea>
+		</div>
+		<div>
+			<a href="#" onclick="stringFormat()">Format!</a>
+		</div>
+	</div>
+	<script src="scripts/js-console.js"></script>		   
+	<script>
+		function stringFormat() {
+		
+			var string = document.getElementById("tb-string").value;
+			var index = (string.substr(1, string.length - 1)).indexOf('"');
+			var format = string.substr(1, index);
+			var args = "";
+			args = string.substr(index + 2, string.length - index);
+			var arguments = [];
+			arguments = args.split(',');
+			var numberOfArgs = 0;
+
+			for (var j = 0; j < arguments.length; j++)
+			{	
+				arguments[j] = arguments[j].replace(",", "");
+				arguments[j] = arguments[j].replace(" ", "");
+				arguments[j] = arguments[j].replace("\"", "");
+				arguments[j] = arguments[j].replace("\"", "");
+			}
+			
+			for (var i = 0; i < format.length; i++)
+			{													
+				if(format.substr(i, 1) == "{") {
+					if(format.substr(i + 2, 1) == "}") {
+						numberOfArgs = parseInt(format.substr(i + 1, 1));					
+						format = format.replace(format.substr(i, 3), arguments[numberOfArgs + 1]); 
+					}
+					else {
+						numberOfArgs = parseInt(format.substr(i + 1, 2));
+						format = format.replace(format.substr(i, 4), arguments[numberOfArgs + 1]); 
+					}
+					
+				}
+			}
+			jsConsole.writeLine(format);
+		}
+		jsConsole.writeLine();
+		jsConsole.writeLine("Example:");
+		jsConsole.writeLine('"{0}, {1}, {0} text {2}",format,1,"Pesho","Gosho"');
+	</script>
+</body>
+</html>

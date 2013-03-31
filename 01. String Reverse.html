@@ -1,0 +1,46 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <title>String Reverse!</title>
+	<link href="styles/js-console.css" rel="stylesheet" />
+</head>
+<body>
+	<div id="js-console">
+		<div class="input">
+			<label for="tb-number">Input Text:</label>
+			<input type="text" id="tb-text"/>
+			<a href="#" onclick="onExecuteButtonClick()">Reverse!</a>
+		</div>	
+	</div>
+	<script src="scripts/js-console.js"></script>		   
+	<script>
+		function onExecuteButtonClick() {
+		
+			var text = document.getElementById("tb-text").value;
+		
+			jsConsole.write(text + " -> ");	
+						
+			function printReversedNumber(text) {
+				
+				var i = text.length;
+									
+				while(i >= 0) {
+				
+					symbol = text.substr(i, 1);
+					jsConsole.write(symbol);
+					i--;
+				}		
+				jsConsole.writeLine();
+			}	
+			printReversedNumber(text);
+		}
+		
+		jsConsole.writeLine();
+		jsConsole.writeLine("Example:");
+		jsConsole.writeLine("sample -> elpmas");
+		jsConsole.writeLine("-------------");
+		jsConsole.writeLine("Try it yourself :)");
+		
+	</script>
+</body>
+</html>

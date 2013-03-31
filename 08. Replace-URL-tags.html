@@ -1,0 +1,54 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <title>Replace-URL-tags!</title>
+	<link href="styles/js-console.css" rel="stylesheet" />
+</head>
+<body>
+	<div id="js-console">
+		<div class="input">
+			<label for="tb-html">HTML content:</label>
+			<textarea id="tb-html"></textarea>
+		</div>
+		<div>
+			<a href="#" onclick="onReplaceButtonClick()">Replace!</a>
+		</div>
+	</div>
+	<script src="scripts/js-console.js"></script>		   
+	<script>
+		function onReplaceButtonClick() {
+		
+			var text = document.getElementById("tb-html").value;
+			var i = 0;
+			var intag = false;
+			var outtag = true;
+			var result = "";
+				
+			while(i < text.length - 4) 
+			{							
+				if(text.substr(i, 2) == "<a" ) {
+					result += "[URL";
+					intag = true;
+					outtag = false;
+					i = i + 7;
+				}
+				else if(text.substr(i, 1) == ">" && intag == true) {
+					result += "]";
+					intag = false;
+					outtag = true;
+				}
+				else if(text.substr(i, 4) == "</a>") {
+					result += "[/URL]";
+					i = i + 4;
+				}
+				else {
+					result += text.substr(i, 1);
+				}
+				i++;
+			}
+			jsConsole.writeLine("The result is:");
+			jsConsole.writeLine(result);
+		}		
+	</script>
+</body>
+</html>

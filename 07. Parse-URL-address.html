@@ -1,0 +1,49 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>Parse URL address!</title>
+	<link href="styles/js-console.css" rel="stylesheet" />
+</head>
+<body>
+	<div id="js-console">
+		<div class="input">
+			<div>
+				<label for="tb-url">URL address:</label>
+				<textarea id="tb-url"></textarea>
+			</div>
+			<div>
+				<a href="#" onclick="onParseClick()">Parse!</a>
+			</div>
+		</div>	
+	</div>
+	<script src="scripts/js-console.js"></script>		   
+	<script>
+		function onParseClick() {
+			
+			var urlAddress = document.getElementById("tb-url").value;
+			var endProtocolIndex = 0;
+			var endServerIndex = 0;
+			
+			for(var i=0; i < urlAddress.length; i++)
+			{
+				if(urlAddress.substr(i, 3) == "://") {
+					endProtocolIndex = i;
+					i = i + 3;
+				}
+				else if (urlAddress.substr(i, 1) == "/" && endServerIndex == 0) {
+					endServerIndex = i;
+				}
+			}
+			
+			var protocol = urlAddress.substr(0, endProtocolIndex);
+			var server = urlAddress.substr(endProtocolIndex + 3, endServerIndex - endProtocolIndex - 3);
+			var resource = urlAddress.substr(endServerIndex + 1, urlAddress.length - endServerIndex - 1);
+
+			jsConsole.writeLine("The result is:");
+			jsConsole.writeLine("protocol: " + protocol);	
+			jsConsole.writeLine("server: " + server);	
+			jsConsole.writeLine("resource: " + resource);				
+		}	
+	</script>
+</body>
+</html>

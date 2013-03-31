@@ -1,0 +1,73 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <title>Check Expression!</title>
+	<link href="styles/js-console.css" rel="stylesheet" />
+</head>
+<body>
+	<div id="js-console">
+		<div class="input">
+			<label for="tb-number">Input Expression:</label>
+			<input type="text" id="tb-text"/>
+			<a href="#" onclick="onExecuteButtonClick()">Check!</a>
+		</div>	
+	</div>
+	<script src="scripts/js-console.js"></script>		   
+	<script>
+		function onExecuteButtonClick() {
+		
+			var text = document.getElementById("tb-text").value;
+		
+			jsConsole.write(text + " -> ");	
+			
+			var i = 0;
+			var inbrackets = false;
+			var outbrackets = true;
+			var brackets = 0;
+			
+			function printReversedNumber(text) {
+				
+				while(i < text.length) {
+				
+					symbol = text.substr(i, 1);
+					i++;
+					
+					if(symbol == "(" ) {
+						inbrackets = true;
+						outbrackets = false;
+						brackets++;
+					}
+					else if(symbol == ")" ) {
+						if(brackets == 1) {
+							inbrackets = false;
+							outbrackets = true;
+						}
+						else if (brackets == 0) {
+							inbrackets = true;
+							outbrackets = false;
+							break;
+						}				
+						brackets--;
+					}
+				}
+			}	
+			printReversedNumber(text);
+			
+			if (inbrackets == false && outbrackets == true) {
+				jsConsole.writeLine("Correct expression");
+			}
+			else {
+				jsConsole.writeLine("Incorrect expression");
+			}
+		}
+		
+		jsConsole.writeLine();
+		jsConsole.writeLine("Example:");
+		jsConsole.writeLine("((a+b)/5-d) -> Correct expression");
+		jsConsole.writeLine(")(a+b)) -> Incorrect expression");
+		jsConsole.writeLine("-------------");
+		jsConsole.writeLine("Try it yourself :)");
+		
+	</script>
+</body>
+</html>

@@ -1,0 +1,47 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>Find substring in text!</title>
+	<link href="styles/js-console.css" rel="stylesheet" />
+</head>
+<body>
+	<div id="js-console">
+		<div class="input">
+			<div>
+				<label for="tb-text">Input text:</label>
+				<textarea id="tb-text"></textarea>
+			</div>
+			<div>
+				<label for="tb-substring">Input substring:</label>
+				<input type="text" id="tb-substring"/>
+				<p><a href="#" onclick="onSensitiveSearchClick()">Search!</a></p>
+			</div>
+		</div>	
+	</div>
+	<script src="scripts/js-console.js"></script>		   
+	<script>
+		function onSensitiveSearchClick(number) {
+															
+			function FindSubstringInText() {
+			
+				var text = document.getElementById("tb-text").value.toLowerCase();		
+				var substring = document.getElementById("tb-substring").value.toLowerCase();			
+				var count = 0;
+				var i = 0;
+			
+				while(i < text.length - substring.length)
+				{
+					if (text.substr(i, substring.length) == substring)
+					{
+						count++;
+					}
+					i++;
+				}
+				jsConsole.writeLine("The result is:" + count);
+			}				
+			FindSubstringInText();
+		}	
+		jsConsole.writeLine();	
+	</script>
+</body>
+</html>

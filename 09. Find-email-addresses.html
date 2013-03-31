@@ -1,0 +1,50 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <title>Find email addresses!</title>
+	<link href="styles/js-console.css" rel="stylesheet" />
+</head>
+<body>
+	<div id="js-console">
+		<div class="input">
+			<label for="tb-text">Text content:</label>
+			<textarea id="tb-text"></textarea>
+		</div>
+		<div>
+			<a href="#" onclick="onFindButtonClick()">Find!</a>
+		</div>
+	</div>
+	<script src="scripts/js-console.js"></script>		   
+	<script>
+		function onFindButtonClick() {
+		
+			var text = document.getElementById("tb-text").value;
+			var tokens = [];
+			var emails = [];
+			var index = 0;
+			tokens = text.split(' ');
+			
+			for(var i = 0; i < tokens.length; i++)
+			{
+				var at = tokens[i].indexOf("@");
+				if(at > 0) {
+					var extension = tokens[i].substr(at, tokens[i].length);
+					var point = extension.indexOf(".");
+					var host = extension.substr(1, point - 1);
+					var domain = extension.substr(point, extension.length - point);
+					
+					if(point > 0 && host.length > 2 && domain.length > 2) {
+						emails[index] = tokens[i];
+						index++;
+					}
+				}					
+			}
+			
+			for(email in emails)
+			{
+				jsConsole.writeLine(emails[email]);
+			}
+		}		
+	</script>
+</body>
+</html>

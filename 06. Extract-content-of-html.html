@@ -1,0 +1,53 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>Extract HTML Content!</title>
+	<link href="styles/js-console.css" rel="stylesheet" />
+</head>
+<body>
+	<div id="js-console">
+		<div class="input">
+			<div>
+				<label for="tb-text">HTML Content:</label>
+				<textarea id="tb-text"></textarea>
+			</div>
+			<div>
+				<p><a href="#" onclick="onExtractClick()">Extract!</a></p>
+			</div>
+		</div>	
+	</div>
+	<script src="scripts/js-console.js"></script>		   
+	<script>
+		function onExtractClick() {
+			
+			var text = document.getElementById("tb-text").value;
+			var intag = false;
+			var outtag = false;
+			var result = "";
+			
+			for(i = 0; i < text.length; i++) 
+			{
+				if (text.substr(i, 1) == "<")
+				{
+					intag = true;
+					outtag = false;
+				}
+				else if(text.substr(i, 1) == ">")
+				{
+					intag = false;
+					outtag = true;
+				}
+				else
+				{
+					if(intag == false)
+					{
+						result = result + text.substr(i, 1);
+					}
+				}
+			}			
+			jsConsole.writeLine("The result is:");
+			jsConsole.writeLine(result);							
+		}	
+	</script>
+</body>
+</html>

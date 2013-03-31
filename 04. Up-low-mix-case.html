@@ -1,0 +1,111 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>Up, low and mix case!</title>
+	<link href="styles/js-console.css" rel="stylesheet" />
+</head>
+<body>
+	<div id="js-console">
+		<div class="input">
+			<div>
+				<label for="tb-text">Input text:</label>
+				<textarea id="tb-text"></textarea>
+			</div>
+			<div>
+				<p><a href="#" onclick="onChangeClick()">Change!</a></p>
+			</div>
+		</div>	
+	</div>
+	<script src="scripts/js-console.js"></script>		   
+	<script>
+		function onChangeClick() {
+		
+			function changeCaseInText() {
+			
+				var text = document.getElementById("tb-text").value;
+				var upResult;
+				var upCase = new Array();
+				upCase = text.split("<upcase>");
+				
+				upResult = upCase[0];
+				
+				for(var j=1; j < upCase.length; j++)
+				{
+					var tokens = [];
+					tokens = upCase[j].split("</upcase>");
+
+					for(var i = 0; i < tokens.length; i++) 
+					{
+						if(i == 0) {
+							upResult = upResult + tokens[i].toUpperCase();
+						}
+						else {
+							upResult = upResult + tokens[i];
+						}
+					}
+				}
+				
+				var lowCase = [];
+				var lowResult;
+				lowCase = upResult.split("<lowcase>");
+				
+				lowResult = lowCase[0];
+				
+				for(var j=1; j < lowCase.length; j++)
+				{
+					var tokens = [];
+					tokens = lowCase[j].split("</lowcase>");
+
+					for(var i = 0; i < tokens.length; i++) 
+					{
+						if(i == 0) {
+							lowResult = lowResult + tokens[i].toLowerCase();
+						}
+						else {
+							lowResult = lowResult + tokens[i];
+						}
+					}
+				}
+				
+				var mixCase = [];
+				var mixResult;
+				mixCase = lowResult.split("<mixcase>");
+				
+				mixResult = mixCase[0];
+				
+				for(var j=1; j < mixCase.length; j++)
+				{
+					var tokens = [];
+					tokens = mixCase[j].split("</mixcase>");
+
+					for(var i = 0; i < tokens.length; i++) 
+					{
+						if(i == 0) {
+							for(var k=0; k < tokens[i].length; k++)
+							{
+								var random = Math.floor((Math.random()*2)+1);
+								if (random == 2)
+								{
+									mixResult = mixResult + tokens[i].substr(k, 1).toUpperCase();
+								}
+								else
+								{
+									mixResult = mixResult + tokens[i].substr(k, 1).toLowerCase();
+								}
+							}
+						}
+						else {
+							mixResult = mixResult + tokens[i];
+						}
+					}
+				}
+
+				jsConsole.writeLine("The result is:" + random);
+				jsConsole.writeLine(mixResult);
+			}				
+			changeCaseInText();
+		}	
+		jsConsole.writeLine();	
+	</script>
+</body>
+</html>

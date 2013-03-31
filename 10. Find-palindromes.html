@@ -1,0 +1,57 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <title>Find palindromes!</title>
+	<link href="styles/js-console.css" rel="stylesheet" />
+</head>
+<body>
+	<div id="js-console">
+		<div class="input">
+			<label for="tb-text">Text content:</label>
+			<textarea id="tb-text"></textarea>
+		</div>
+		<div>
+			<a href="#" onclick="onFindButtonClick()">Find!</a>
+		</div>
+	</div>
+	<script src="scripts/js-console.js"></script>		   
+	<script>
+		function onFindButtonClick() {
+		
+			var text = document.getElementById("tb-text").value;
+			var tokens = [];
+			tokens = text.split(' ');
+			var palindromes = [];
+			
+			for(var i = 0; i < tokens.length; i++)
+			{
+				tokens[i] = tokens[i].replace(",", "");
+				tokens[i] = tokens[i].replace(".", "");
+				tokens[i] = tokens[i].replace(";", "");
+
+				var length = tokens[i].length / 2;
+				var symbolsLeft = tokens[i].substr(0, length);
+				var symbolsRight = "";
+				if(length % 2 != 0) {
+					symbolsRight = tokens[i].substr(length + 1, length);
+				}
+				else {
+					symbolsRight = tokens[i].substr(length, length);
+				}
+				
+				var reversed = "";
+				var j = length;
+				while(j >= 0)
+				{
+					reversed += (symbolsRight.substr(j,1));
+					j--;
+				}
+				
+				if(symbolsLeft == reversed) {
+					jsConsole.writeLine(tokens[i]);
+				}
+			}
+		}		
+	</script>
+</body>
+</html>

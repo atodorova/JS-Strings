@@ -1,4 +1,0 @@
-JS-Strings
-==========
-
-JS Strings
